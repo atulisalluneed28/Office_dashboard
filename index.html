@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Docue Sense Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div class="login-container">
+  <div class="login-box">
+    <div class="brand">ORT</div>
+    <h2>Sign in</h2>
+    <p>Use your organization account</p>
+    <input type="email" placeholder="Email address">
+    <input type="password" placeholder="Password">
+    <button onclick="login()">Sign In</button>
+    <div class="login-footer">© 2026 Docue Sense</div>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
+<div class="dashboard">
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <div class="logo">📄 ORT</div>
+
+    <div class="top-values">
+      <span>Improve</span>
+      <span>Secure</span>
+      <span>Comply</span>
+      <span>Sign Faster</span>
+    </div>
+
+    <div class="header-icons">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <i class="fa-regular fa-bell"></i>
+      <i class="fa-solid fa-right-from-bracket"></i>
+    </div>
+  </div>
+
+  <!-- MAIN -->
+  <div class="main-wrapper">
+
+    <aside class="sidebar">
+      <div class="sidebar-title">MENU</div>
+     <a>Dashboard</a>
+      <a>Clients</a>
+      <a>Documents</a>
+      <a>Compliance</a>
+      <a>Settings</a>
+    </aside>
+
+    <main class="content">
+
+      <!-- ROW 1: CLIENT INFO (span-2) + UPLOAD (span-1) -->
+      <div class="card span-2 client-card">
+        <div class="client-info">
+          <div class="client-left">
+            <div>
+              <span class="label">Name</span>
+              <span class="value">Atul Sharma</span>
+            </div>
+            <div>
+              <span class="label">Company</span>
+              <span class="value">OneRoofTech Pvt Ltd</span>
+            </div>
+            <div>
+              <span class="label">Status</span>
+             <span class="status-badge active">Active</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="support-analytics">
+          <div class="analytics-header">
+            <span>Total Uploads</span>
+            <span class="analytics-value">
+              <strong>78%</strong>
+              <small class="positive">+14</small>
+            </span>
+          </div>
+          <canvas id="supportChart" height="90"></canvas>
+          <div class="sales-progress">
+            <div>
+              <span>Total Upload</span>
+              <strong>$186</strong>
+            </div>
+            <div class="progress-bar"><span></span></div>
+            <small>YoY Growth • 80%</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="card upload-card">
+        <h3>Upload</h3>
+        <div class="upload-area">
+          <div class="upload-icon">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <p class="upload-title">Drag and drop your files here</p>
+          <p class="upload-sub">Files supported: JPG, PNG, GIF</p>
+          <span class="or-text">or</span>
+          <button class="browse-btn">Browse files</button>
+          <p class="upload-limit">Maximum size: 2mb</p>
+        </div>
+
+        <div class="upload-files">
+          <div class="file-item">
+            <i class="fa-regular fa-file-image"></i>
+            <div>
+              <strong>Image 1.png</strong>
+              <small>13 August 2020 • 1.2mb</small>
+            </div>
+            <i class="fa-solid fa-trash delete"></i>
+          </div>
+
+          <div class="file-item">
+            <i class="fa-regular fa-file-image"></i>
+            <div>
+              <strong>Image 2.jpg</strong>
+              <small>13 August 2020 • 1.7mb</small>
+            </div>
+            <i class="fa-solid fa-trash delete"></i>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW 2: SYSTEM STATUS + PRODUCTIVITY (PIE CHART) + STAT CARDS -->
+      <div class="card system-status">
+        <h3>System Status</h3>
+        <div class="status-item">
+          💬 <span>Text Messages</span>
+          <span class="new-badge">NEW</span>
+        </div>
+        <div class="status-item">
+          📋 <span>Tasks</span>
+        </div>
+        <div class="status-item">
+          📅 <span>Calendar Events</span>
+        </div>
+        <div class="status-item">
+          📰 <span>Newsfeed</span>
+        </div>
+      </div>
+
+      <div class="card productivity-card">
+        <h3>Productivity</h3>
+        <canvas id="chart"></canvas>
+      </div>
+
+      <!-- STAT CARDS ROW (2x2 grid, span-1) -->
+      <div class="stat-cards-wrapper">
+        <!-- TOTAL EMPLOYEES -->
+        <div class="stat-card purple" data-tooltip="Total number of employees in the organization">
+          <div class="stat-header">
+            <span>Total Employees</span>
+            <div class="icon purple">👥</div>
+          </div>
+          <h1>53</h1>
+          <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 100 100">
+              <circle class="gauge-background-circle" cx="50" cy="50" r="40"></circle>
+              <circle class="gauge-fill-circle gauge-circle-purple" cx="50" cy="50" r="40" 
+                      style="stroke-dasharray: 251; stroke-dashoffset: 0;"></circle>
+            </svg>
+            <div class="gauge-text">100%</div>
+            <div class="gauge-text-sub">Active</div>
+          </div>
+        </div>
+
+        <!-- EMPLOYEES PRESENT TODAY -->
+        <div class="stat-card green" data-tooltip="Employees who are present today">
+          <div class="stat-header">
+            <span>Present Today</span>
+            <div class="icon green">🧍</div>
+          </div>
+          <h1>44</h1>
+          <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 100 100">
+              <circle class="gauge-background-circle" cx="50" cy="50" r="40"></circle>
+              <circle class="gauge-fill-circle gauge-circle-green" cx="50" cy="50" r="40" 
+                      style="stroke-dasharray: 251; stroke-dashoffset: 43;"></circle>
+            </svg>
+            <div class="gauge-text">83%</div>
+            <div class="gauge-text-sub">Present</div>
+          </div>
+        </div>
+
+        <!-- EMPLOYEES ON LEAVE -->
+        <div class="stat-card red" data-tooltip="Employees currently on leave">
+          <div class="stat-header">
+            <span>On Leave</span>
+            <div class="icon red">⛔</div>
+          </div>
+          <h1>09</h1>
+          <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 100 100">
+              <circle class="gauge-background-circle" cx="50" cy="50" r="40"></circle>
+              <circle class="gauge-fill-circle gauge-circle-red" cx="50" cy="50" r="40" 
+                      style="stroke-dasharray: 251; stroke-dashoffset: 208;"></circle>
+            </svg>
+            <div class="gauge-text">17%</div>
+            <div class="gauge-text-sub">Leave</div>
+          </div>
+        </div>
+
+        <!-- EMPLOYEES LATE TODAY -->
+        <div class="stat-card yellow" data-tooltip="Employees who arrived late today">
+          <div class="stat-header">
+            <span>Late Today</span>
+            <div class="icon yellow">⏰</div>
+          </div>
+          <h1>0</h1>
+          <div class="gauge-container">
+            <svg class="gauge-svg" viewBox="0 0 100 100">
+              <circle class="gauge-background-circle" cx="50" cy="50" r="40"></circle>
+              <circle class="gauge-fill-circle gauge-circle-yellow" cx="50" cy="50" r="40" 
+                      style="stroke-dasharray: 251; stroke-dashoffset: 251;"></circle>
+            </svg>
+            <div class="gauge-text">0%</div>
+            <div class="gauge-text-sub">Late</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ROW 4: DOCUMENTS TABLE (span-3) -->
+      <div class="card customers-table span-3">
+        <div class="table-header">
+          <h3>Documents <span class="badge">New</span></h3>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th><input type="checkbox" id="select-all"></th>
+              <th>File</th>
+              <th>Users</th>
+              <th>Category</th>
+              <th>Status</th>
+              <th>FY</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><input type="checkbox" class="row-checkbox"></td>
+              <td>
+                <strong>file_001.jpg</strong><br>
+                <small>281mb total</small>
+              </td>
+              <td>
+                <div class="user-cell" data-users=" John Doe, Neha Singh, Aman Gupta, Rahul Mehta">
+                  👤 <span>+4</span>
+                </div>
+              </td>
+              <td>Automotive</td>
+              <td><span class="status completed">Completed</span></td>
+              <td class="fy">FY 2024–25</td>
+              <td class="action-cell">
+                <div class="action-menu">
+                  <button class="action-btn">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                  <div class="dropdown">
+                    <div class="dropdown-item">⭐ Add to favorites</div>
+                    <div class="dropdown-item">ℹ Details</div>
+                    <div class="dropdown-item">✏ Rename</div>
+                    <div class="dropdown-item">📄 Move or copy</div>
+                    <div class="dropdown-item">⬇ Download</div>
+                    <div class="dropdown-item delete">🗑 Delete file</div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><input type="checkbox" class="row-checkbox"></td>
+              <td>
+                <strong>file_001.docx</strong><br>
+                <small>2.8gb total</small>
+              </td>
+              <td>
+                <div class="user-cell" data-users=" John Doe, Neha Singh, Aman Gupta,">
+                  👤 <span>+3</span>
+                </div>
+              </td>
+              <td>E-Commerce</td>
+              <td><span class="status completed">Completed</span></td>
+              <td class="fy">FY 2022–23</td>
+              <td class="action-cell">
+                <div class="action-menu">
+                  <button class="action-btn">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                  <div class="dropdown">
+                    <div class="dropdown-item">⭐ Add to favorites</div>
+                    <div class="dropdown-item">ℹ Details</div>
+                    <div class="dropdown-item">✏ Rename</div>
+                    <div class="dropdown-item">📄 Move or copy</div>
+                    <div class="dropdown-item">⬇ Download</div>
+                    <div class="dropdown-item delete">🗑 Delete file</div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><input type="checkbox" class="row-checkbox"></td>
+              <td>
+                <strong>file_001.docx</strong><br>
+                <small>8.1tb total</small>
+              </td>
+              <td>
+                <div class="user-cell" data-users="Riya Verma, Aman Gupta, Rahul Mehta, Rajiv Gandhi, Neha Kakar">
+                  👤 <span>+5</span>
+                </div>
+              </td>
+              <td>Electronics</td>
+              <td><span class="status pending">Pending</span></td>
+              <td class="fy">FY 2020–21</td>
+              <td class="action-cell">
+                <div class="action-menu">
+                  <button class="action-btn">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                  <div class="dropdown">
+                    <div class="dropdown-item">⭐ Add to favorites</div>
+                    <div class="dropdown-item">ℹ Details</div>
+                    <div class="dropdown-item">✏ Rename</div>
+                    <div class="dropdown-item">📄 Move or copy</div>
+                    <div class="dropdown-item">⬇ Download</div>
+                    <div class="dropdown-item delete">🗑 Delete file</div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+
+            <tr>
+              <td><input type="checkbox" class="row-checkbox"></td>
+              <td>
+                <strong>file_001.jpg</strong><br>
+                <small>124mb total</small>
+              </td>
+              <td>
+                <div class="user-cell" data-users="Riya Verma, Ankit Singh">
+                  👤 <span>+2 </span>
+                </div>
+              </td>
+              <td>Main Text</td>
+              <td><span class="status cancelled">Cancelled</span></td>
+              <td class="fy">FY 2018–19</td>
+              <td class="action-cell">
+                <div class="action-menu">
+                  <button class="action-btn">
+                    <i class="fa-solid fa-ellipsis"></i>
+                  </button>
+                  <div class="dropdown">
+                    <div class="dropdown-item">⭐ Add to favorites</div>
+                    <div class="dropdown-item">ℹ Details</div>
+                    <div class="dropdown-item">✏ Rename</div>
+                    <div class="dropdown-item">📄 Move or copy</div>
+                    <div class="dropdown-item">⬇ Download</div>
+                    <div class="dropdown-item delete">🗑 Delete file</div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+function login() {
+  document.body.classList.add("logged-in");
+}
+
+/* PIE CHART */
+new Chart(document.getElementById("chart"), {
+  type: "pie",
+  data: {
+    labels: ["Signed", "Pending", "Draft", "Completed"],
+    datasets: [{
+      data: [45, 30, 15, 10],
+      backgroundColor: ["#2563eb", "#9ca3af", "#e5e7eb", "#ADD8E6"],
+      borderWidth: 0
+    }]
+  }
+});
+
+/* SELECT ALL CHECKBOX */
+const selectAllCheckbox = document.getElementById("select-all");
+const rowCheckboxes = document.querySelectorAll(".row-checkbox");
+
+selectAllCheckbox?.addEventListener("change", function () {
+  rowCheckboxes.forEach(cb => cb.checked = this.checked);
+});
+
+document.querySelectorAll(".action-btn").forEach(btn => {
+  btn.addEventListener("click", function (e) {
+    e.stopPropagation();
+    document.querySelectorAll(".dropdown").forEach(d => {
+      if (d !== this.nextElementSibling) {
+        d.style.display = "none";
+      }
+    });
+    const menu = this.nextElementSibling;
+    menu.style.display = menu.style.display === "block" ? "none" : "block";
+  });
+});
+
+document.addEventListener("click", () => {
+  document.querySelectorAll(".dropdown").forEach(d => {
+    d.style.display = "none";
+  });
+});
+
+const ctx = document.getElementById("supportChart").getContext("2d");
+
+new Chart(ctx, {
+  type: "line",
+  data: {
+    labels: ["2019", "2020", "2021", "2022", "2023", "2024"],
+    datasets: [{
+      data: [200, 450, 300, 380, 280, 520],
+      borderColor: "#22c55e",
+      backgroundColor: "rgba(34,197,94,0.2)",
+      fill: true,
+      tension: 0.45,
+      pointRadius: 4,
+      pointHoverRadius: 8,
+      pointHitRadius: 12,
+      pointBackgroundColor: "#22c55e"
+    }]
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: {
+      mode: "nearest",
+      intersect: false
+    },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        enabled: true,
+        backgroundColor: "#111827",
+        titleColor: "#fff",
+        bodyColor: "#fff",
+        padding: 10,
+        cornerRadius: 8,
+        displayColors: false,
+        callbacks: {
+          title: (items) => `Year ${items[0].label}`,
+          label: (item) => `${item.parsed.y} uploads`
+        }
+      }
+    },
+    scales: {
+      x: { display: false },
+      y: { display: false }
+    }
+  }
+});
+</script>
+
+</body>
+</html>
